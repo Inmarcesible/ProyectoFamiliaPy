@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.template import loader
 from datetime import datetime
 from AppFami.models import Persona
@@ -17,3 +17,22 @@ def persona(request, nombre, rutpersona, genero, fecnacimiento):
     }
     documento = plantilla.render(contexto)
     return HttpResponse(documento)
+
+def inicio(request):
+    return HttpResponse("Vista Inicio")
+
+def personas(request):
+    contexto = {
+        'personas': {
+            'persona1': 'Nombre1',
+            'persona2': 'Nombre2',
+            'persona3': 'Nombre3',
+        }
+    }
+    return render(request, 'personas.html', contexto)
+
+def hijos(request):
+    return render(request, 'hijos.html')
+
+def padres(request):
+    return redirect('AppFamiInicio')
