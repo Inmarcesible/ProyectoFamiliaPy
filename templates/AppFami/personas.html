@@ -1,0 +1,10 @@
+{% extends 'AppFami/index.html' %}
+
+{% block title%}Personas{% endblock %}
+
+{% block body %}
+    <h5>Las Personas ingresadas son: </h5>
+    {% for key, value in personas.items %}
+        <p>la persona {{key}} tiene nombre {{value}}</p>
+    {% endfor %}
+{% endblock %}

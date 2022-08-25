@@ -4,6 +4,7 @@ from django.template import loader
 from datetime import datetime
 from AppFami.models import Persona
 
+from AppFami.dtos import personas_dto
 
 def persona(request, nombre, rutpersona, genero, fecnacimiento):
     per = Persona(nombre=nombre, rutpersona=rutpersona, genero=genero, fecnacimiento=fecnacimiento)
@@ -18,9 +19,11 @@ def persona(request, nombre, rutpersona, genero, fecnacimiento):
     documento = plantilla.render(contexto)
     return HttpResponse(documento)
 
+# Nuevo
 def inicio(request):
-    return HttpResponse("Vista Inicio")
+    return render(request, 'AppFami/index.html')
 
+"""
 def personas(request):
     contexto = {
         'personas': {
@@ -29,10 +32,17 @@ def personas(request):
             'persona3': 'Nombre3',
         }
     }
-    return render(request, 'personas.html', contexto)
+    return render(request, 'AppFami/personas.html', contexto)
+"""
+def personas(request):
+    #personas = Persona.object.all() #lista
+    return render(request, 'AppFami/personas.html', personas_dto)
 
 def hijos(request):
-    return render(request, 'hijos.html')
+    return render(request, 'AppFami/hijos.html')
 
 def padres(request):
-    return redirect('AppFamiInicio')
+    #return redirect('AppFamiInicio')
+    return render(request, 'AppFami/padres.html')
+
+

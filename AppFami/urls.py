@@ -3,7 +3,7 @@ from AppFami.views import inicio, hijos, personas, padres
 
 urlpatterns = [
     path('', inicio, name='AppFamiInicio'),
-    path('personas',personas),
-    path('hijos',hijos),
-    path('padres',padres),
+    path('personas',personas, name = 'AppFamiPersonas'),
+    path('hijos',hijos, name = 'AppFamiHijos'),
+    path('padres',padres, name = 'AppFamiPadres'),
 ]
