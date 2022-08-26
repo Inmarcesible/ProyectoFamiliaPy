@@ -65,6 +65,8 @@ def buscar_persona(request):
         rut = request.POST.get('rutpersona')
         persona_buscar = Persona.objects.filter(rutpersona__icontains=rut)
         #persona_buscar = Persona.objects.filter(rutpersona__icontains=rut).first() #Trae la primera persona que encuentre
+    else:
+        redirect('AppFamiPersonas')
 
     contexto = {
         'my_form': BuscaPersona(),
@@ -78,7 +80,6 @@ def hijos(request):
 def padres(request):
     #return redirect('AppFamiInicio')
     return render(request, 'AppFami/padres.html')
-
 
 
 

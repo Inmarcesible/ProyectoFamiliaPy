@@ -3,18 +3,34 @@
 {% block title%}Buscador Persona{% endblock %}
 
 {% block body %}
-    <form acction="" method="POST">
-        {% csrf_token %}
-        {{my_form.as_p}}
+    <!--<form acction="/AppFami/buscar" method="post">   V29/1:30:00 -->
+    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+        <div class="flex-grow-1">
 
-        <input type="submit" value="Buscar Rut">
-    </form>
-    <div>
-        <h5>La persona buscada es:</h5>
-        {% for per in personab %}
-            <p>Ustes a buscado a Nombre: {{per.nombre}}/ Rut: {{per.rutpersona}}/ Genero: {{per.genero}}</p>
-            {{persona}}
-        {% endfor %}
+            <form acction="" method="post">
+                {% csrf_token %}
+                {{my_form.as_p}}
+
+                <input type="submit" value="Buscar Rut">
+            </form>
+
+        </div>
+    </div>
+    <hr class="m-0" />
+    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+        <div class="flex-grow-1">
+
+            {% if personab %}
+                <h5>La persona buscada es:</h5>
+                {% for per in personab %}
+                    <p>Ustes a buscado a Nombre: {{per.nombre}}/ Rut: {{per.rutpersona}}/ Genero: {{per.genero}}</p>
+                    {{persona}}
+                {% endfor %}
+            {% else %}
+                <p>No hay datos para el rut ingresado</p>
+            {% endif %}
+
+        </div>
     </div>
 
 {% endblock %}

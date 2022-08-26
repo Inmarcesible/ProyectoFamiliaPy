@@ -6,5 +6,5 @@ urlpatterns = [
     path('personas',personas, name = 'AppFamiPersonas'),
     path('hijos',hijos, name = 'AppFamiHijos'),
     path('padres',padres, name = 'AppFamiPadres'),
-    path('Buscar',buscar_persona, name = 'AppFamiBuscarPersona'),
+    path('buscar',buscar_persona, name = 'AppFamiBuscarPersona'),
 ]
