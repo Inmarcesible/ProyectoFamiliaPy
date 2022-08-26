@@ -109,4 +109,3 @@ def padres(request):
     #return redirect('AppFamiInicio')
     #return render(request, 'AppFami/padres.html')
 
-
