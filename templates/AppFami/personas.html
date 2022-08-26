@@ -5,6 +5,7 @@
 {% block body %}
     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
         <div class="flex-grow-1">
+            <h5>Ingrese una persona </h5>
             <form acction="" method="POST">
                 {% csrf_token %}
                     {{my_form.as_p}}

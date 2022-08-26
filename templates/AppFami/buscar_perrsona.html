@@ -7,6 +7,7 @@
     <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
         <div class="flex-grow-1">
 
+            <h5>Ingrese el rut de la persona que desea buscar: </h5>
             <form acction="" method="post">
                 {% csrf_token %}
                 {{my_form.as_p}}
@@ -27,7 +28,7 @@
                     {{persona}}
                 {% endfor %}
             {% else %}
-                <p>No hay datos para el rut ingresado</p>
+                <p>No hay datos para mostrar</p>
             {% endif %}
 
         </div>

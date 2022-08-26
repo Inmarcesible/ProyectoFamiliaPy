@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect
 from django.template import loader
 from datetime import datetime
 
-from AppFami.forms import PersonaForm, BuscaPersona
-from AppFami.models import Persona
+from AppFami.forms import PersonaForm, BuscaPersona, HijoForm, PadreForm
+from AppFami.models import Persona, Hijo, Padre
 
 from AppFami.dtos import personas_dto
 
@@ -75,12 +75,36 @@ def buscar_persona(request):
     return render(request, 'AppFami/buscar_perrsona.html', contexto)
 
 def hijos(request):
-    return render(request, 'AppFami/hijos.html')
+    if request.method == 'POST':
+        my_form = HijoForm(request.POST)
+
+        if my_form.is_valid():
+            data = my_form.cleaned_data
+            hijo_date = Hijo(rutperosna=data.get('rutperosna'),ruthijo=data.get('ruthijo'))
+            hijo_date.save()
+
+    hijos = Hijo.objects.all()
+    contexto = {
+        'hijos': hijos,
+        'my_form': HijoForm
+    }
+    return render(request, 'AppFami/hijos.html', contexto)
 
 def padres(request):
+    if request.method == 'POST':
+        my_form = PadreForm(request.POST)
+
+        if my_form.is_valid():
+            data = my_form.cleaned_data
+            padre_date = Padre(rutperosna=data.get('rutperosna'),rutpadre=data.get('rutpadre'))
+            padre_date.save()
+
+    padres = Padre.objects.all()
+    contexto = {
+        'padres': padres,
+        'my_form': PadreForm
+    }
+    return render(request, 'AppFami/padres.html', contexto)
+
     #return redirect('AppFamiInicio')
-    return render(request, 'AppFami/padres.html')
-
-
-
-
+    #return render(request, 'AppFami/padres.html')

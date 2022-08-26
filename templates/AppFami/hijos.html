@@ -3,6 +3,25 @@
 {% block title%}Hijos{% endblock %}
 
 {% block body %} <!--Esto es lo que voy a sobre escribir - El body de mi pagina de index -->
-    <h5>Relaciones Hijos: </h5>
+
+    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+        <div class="flex-grow-1">
+            <h5>Ingrese un individuo y su hijo: </h5>
+            <form acction="" method="POST">
+                {% csrf_token %}
+                    {{my_form.as_p}}
+                    <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+    <hr class="m-0" />
+    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+        <div class="flex-grow-1">
+            <h5>Relaciones: </h5>
+            {% for per in hijos %}
+                <p>El hij@ del individuo rut: {{per.rutperosna}} es el rut: {{per.ruthijo}}</p>
+            {% endfor %}
+        </div>
+    </div>
     
 {% endblock %}
