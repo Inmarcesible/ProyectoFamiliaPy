@@ -1,0 +1,20 @@
+{% extends 'AppFami/index.html' %}
+
+{% block title%}Buscador Persona{% endblock %}
+
+{% block body %}
+    <form acction="" method="POST">
+        {% csrf_token %}
+        {{my_form.as_p}}
+
+        <input type="submit" value="Buscar Rut">
+    </form>
+    <div>
+        <h5>La persona buscada es:</h5>
+        {% for per in personab %}
+            <p>Ustes a buscado a Nombre: {{per.nombre}}/ Rut: {{per.rutpersona}}/ Genero: {{per.genero}}</p>
+            {{persona}}
+        {% endfor %}
+    </div>
+
+{% endblock %}

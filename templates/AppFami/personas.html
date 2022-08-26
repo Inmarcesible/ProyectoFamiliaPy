@@ -3,8 +3,20 @@
 {% block title%}Personas{% endblock %}
 
 {% block body %}
-    <h5>Las Personas ingresadas son: </h5>
-    {% for key, value in personas.items %}
-        <p>la persona {{key}} tiene nombre {{value}}</p>
-    {% endfor %}
+    <div>
+        <form acction="" method="POST">
+            {% csrf_token %}
+                {{my_form.as_p}}
+                <input type="submit" value="Enviar">
+        </form>
+    </div>
+
+    <div>
+        <h5>Las Personas ingresadas son: </h5>
+        {% for per in personas %}
+            <p>Nombre: {{per.nombre}} / Rut: {{per.rutpersona}} / Genero: {{per.genero}}</p>
+        {% endfor %}
+    </div>
+
+
 {% endblock %}
