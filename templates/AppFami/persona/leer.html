@@ -1,0 +1,26 @@
+{% extends 'AppFami/index.html' %}
+
+{% block title%}Leer Personas{% endblock %}
+
+{% block body %}
+    {% if personas %}
+        <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+            <div class="flex-grow-1">
+                <h5>Las Personas ingresadas son: </h5>
+                {% for per in personas %}
+                    <p>Nombre: {{per.nombre}} / Rut: {{per.rutpersona}} / Genero: {{per.genero}}
+                        <a href="{% url 'AppFamiPersonaEditar' per.rutpersona %}">Editar</a>
+                        <a href="{% url 'AppFamiPersonaEliminar' per.rutpersona %}">Eliminar</a>
+                    </p>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+            <h5>No hay personas ingresadas </h5>
+        </div>
+    {% endif %}
+
+    <a href="{% url 'AppFamiPersonaCrear' %}"> Crear Persona</a>
+
+{% endblock %}

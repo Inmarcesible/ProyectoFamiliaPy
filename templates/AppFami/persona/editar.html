@@ -1,0 +1,18 @@
+{% extends 'AppFami/index.html' %}
+
+{% block title%}Crear Personas{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+        <div class="flex-grow-1">
+            <h5>Ingrese una persona: </h5>
+            <form acction="" method="POST">
+                {% csrf_token %}
+                    {{persona_form.as_p}}
+                    <input type="submit" value="Enviar">
+            </form>
+        </div>
+    </div>
+    <hr class="m-0" />
+
+{% endblock %}

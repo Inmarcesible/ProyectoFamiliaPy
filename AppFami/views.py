@@ -41,6 +41,63 @@ def personas(request):
     #personas = Persona.object.all() #lista
     return render(request, 'AppFami/personas.html', personas_dto)
 """
+
+def persona_leer(request):
+    personas = Persona.objects.all()
+    contexto = {
+        'personas': personas
+    }
+
+    return render(request, 'AppFami/persona/leer.html', contexto)
+
+def persona_editar(request, rutpersona):
+    persona = Persona.objects.get(rutpersona=rutpersona)
+
+    if request.method == 'POST':
+        my_form = PersonaForm(request.POST)
+
+        if my_form.is_valid():
+            data = my_form.cleaned_data
+            persona.nombre = data.get('nombre')
+            persona.rutpersona = data.get('rutpersona')
+            persona.genero = data.get('genero')
+            persona.fecnacimiento = data.get('fecnacimiento')
+
+            persona.save()
+            return redirect('AppFamiPersonaLeer')
+
+    persona_form = PersonaForm(initial={'nombre': persona.nombre,'rutpersona': persona.rutpersona, 'genero': persona.genero, 'fecnacimiento': persona.fecnacimiento})
+
+    contexto = {
+        'persona_form': persona_form
+    }
+    return render(request, 'AppFami/persona/editar.html', contexto)
+
+
+
+def persona_crear(request):
+    if request.method == 'POST':
+        my_form = PersonaForm(request.POST)
+
+        if my_form.is_valid():
+            data = my_form.cleaned_data
+            persona_date = Persona(nombre=data.get('nombre'),rutpersona=data.get('rutpersona'),genero=data.get('genero'),fecnacimiento=data.get('fecnacimiento'))
+            persona_date.save()
+            return redirect('AppFamiPersonaLeer')
+        else:
+            return redirect('AppFamiInicio')
+
+    contexto = {
+        'persona_form': PersonaForm()
+    }
+    return render(request, 'AppFami/persona/crear.html', contexto)
+
+def persona_eliminar(request, rutpersona):
+    persona = Persona.objects.get(rutpersona=rutpersona)
+    persona.delete()
+
+    return redirect('AppFamiPersonaLeer')
+
 def personas(request):
     if request.method == 'POST':
         my_form = PersonaForm(request.POST)
@@ -72,7 +129,7 @@ def buscar_persona(request):
         'my_form': BuscaPersona(),
         'personab': persona_buscar
     }
-    return render(request, 'AppFami/buscar_perrsona.html', contexto)
+    return render(request, 'AppFami/persona/buscar_perrsona.html', contexto)
 
 def hijos(request):
     if request.method == 'POST':
