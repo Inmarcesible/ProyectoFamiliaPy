@@ -14,3 +14,6 @@ urlpatterns = [
     path('persona/editar/<int:rutpersona>', persona_editar, name='AppFamiPersonaEditar'),
 ]
 
+
+
+

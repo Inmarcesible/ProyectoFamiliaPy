@@ -21,5 +21,7 @@ from AppFami.views import persona
 urlpatterns = [
     path('admin/', admin.site.urls),
     #path('persona/<nombre>/<rutpersona>/<genero>/<fecnacimiento>', persona)
-    path('AppFami/', include('AppFami.urls'))
+    path('AppFami/', include('AppFami.urls')),
+    path('user/', include('UserFami.urls')),
 ]
+

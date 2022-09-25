@@ -29,6 +29,11 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger">User: {{ user.get_username }}</a> <a class="nav-link js-scroll-trigger" href="{% url 'UserFamiLogout' %}">Logout</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'UserFamiLogin' %}">Login</a></li>
+                    {% endif %}
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiInicio' %}">Home</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiPersonas' %}">Personas</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiPersonaLeer' %}">PersonasLeer</a></li>
@@ -42,6 +47,14 @@
                 </ul>
             </div>
         </nav>
+        <!--v31 Hora 0:11 min-->
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if mensaje.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
         <!--CONTENIDO-->
         <div class="container-fluid p-0">

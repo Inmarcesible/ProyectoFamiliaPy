@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.template import loader
@@ -74,7 +75,7 @@ def persona_editar(request, rutpersona):
     return render(request, 'AppFami/persona/editar.html', contexto)
 
 
-
+@login_required
 def persona_crear(request):
     if request.method == 'POST':
         my_form = PersonaForm(request.POST)
