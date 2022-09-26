@@ -23,23 +23,32 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
             <a class="navbar-brand js-scroll-trigger" href="#page-top">
-                <!--<span class="d-block d-lg-none">Clarence Taylor</span>-->
-                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'AppFami/assets/img/profile.jpg' %}" alt="..." /></span>
+
+                {% if user.is_authenticated %}
+                    <span class="d-block d-lg-none">User: {{ user.get_username }}</span>
+                    <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{ user.avatar.imagen.url }}" alt="" /></span>
+                {% else %}
+                    <!--<span class="d-block d-lg-none">Clarence Taylor</span>-->
+                    <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{% static 'AppFami/assets/img/profile.jpg' %}" alt="..." /></span>
+                {% endif %}
+                <!--<span class="d-block d-lg-none">Clarence Taylor</span> - ->
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{-%- static 'AppFami/assets/img/profile.jpg' -%-}" alt="..." /></span>-->
+
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger">User: {{ user.get_username }}</a> <a class="nav-link js-scroll-trigger" href="{% url 'UserFamiLogout' %}">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" id="usuario">User: {{ user.get_username }}</a> <a class="nav-link js-scroll-trigger" href="{% url 'UserFamiLogout' %}">Logout</a></li>
                     {% else %}
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'UserFamiLogin' %}">Login</a></li>
                     {% endif %}
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiInicio' %}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiPersonas' %}">Personas</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiPersonaLeer' %}">PersonasLeer</a></li>
+                    <!--<li class="nav-item"><a class="nav-link js-scroll-trigger" href="{-% url 'AppFamiPersonas' %-}">Personas</a></li>-->
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiPersonaLeer' %}">Personas</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiPadres' %}">Padres</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiHijos' %}">Hijos</a></li>
-                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiBuscarPersona' %}">Buscador Persona</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'AppFamiBuscarPersona' %}">Buscar Persona</a></li>
                     <!--<li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#interests">Interests</a></li>
@@ -61,7 +70,10 @@
             <section class="resume-section" id="">
                 <div class="resume-section-content">
                     {% block body %}
-                        <p>No hay nada para mostrar</p>
+                        <h2>Bienvenidos</h2>
+                        <h5>El siguiente sitio alverga los antecedentes personales de un grupo de individuas y sus relaciones directas padres e hijos</h5>
+                        <p>Alumno: Paola Contreras Pavez</p>
+                        <p>Curso: Python</p>
                     {% endblock %}
                 </div>
             </section>

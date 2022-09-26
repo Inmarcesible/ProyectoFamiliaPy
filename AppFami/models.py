@@ -13,7 +13,12 @@ class Hijo(models.Model):
     rutperosna = models.IntegerField()
     ruthijo = models.IntegerField()
 
+    def __str__(self):
+        return f"Rut Perona: {self.rutperosna}, Rut Hijo: {self.ruthijo}"
+
 class Padre(models.Model):
     rutperosna = models.IntegerField()
     rutpadre = models.IntegerField()
 
+    def __str__(self):
+        return f"Rut Perona: {self.rutperosna}, Rut Padre: {self.rutpadre}"

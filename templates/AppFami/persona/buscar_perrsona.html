@@ -24,9 +24,32 @@
             {% if personab %}
                 <h5>La persona buscada es:</h5>
                 {% for per in personab %}
-                    <p>Ustes a buscado a Nombre: {{per.nombre}}/ Rut: {{per.rutpersona}}/ Genero: {{per.genero}}</p>
-                    {{persona}}
+                    <p>Ustes a buscado a Nombre: {{per.nombre}}, Rut: {{per.rutpersona}}, Genero: {{per.genero}}</p>
                 {% endfor %}
+
+                {% if padresb %}
+                    <p>La persona tiene los siguientes rut asociados como sus padres:</p>
+                    {% for per in padresb %}
+                        <p>Rut padre: {{per.rutpadre}}</p>
+                    {% endfor %}
+                {% elif padresb2 %}
+                    <p>La persona tiene los siguientes rut asociados como sus padres:</p>
+                    {% for per in padresb2 %}
+                        <p>Rut padre: {{per.rutperosna}}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>No tiene padres registrados</p>
+                {% endif %}
+
+                {% if hijosb %}
+                    <p>La persona tiene los siguientes rut asociados como sus hidos:</p>
+                    {% for per in hijosb %}
+                        <p>Rut Hijo: {{per.ruthijo}}</p>
+                    {% endfor %}
+                {% else %}
+                    <p>No tiene hijos registrados</p>
+                {% endif %}
+
             {% else %}
                 <p>No hay datos para mostrar</p>
             {% endif %}

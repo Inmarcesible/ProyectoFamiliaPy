@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.shortcuts import render, redirect
 
 from UserFami.forms import UserRegisterForm
+from UserFami.models import Avatar
 
 
 def login_request(request):
@@ -39,10 +40,15 @@ def login_request(request):
 def register(request):
     if request.method == 'POST':
         #form = UserCreationForm(request.POST)
-        form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST, request.FILES)
 
         if form.is_valid():
-            form.save()
+            #form.save()
+            user = form.save()
+
+            avatar = Avatar(user=user, imagen=form.cleaned_data.get('imagen'))
+            avatar.save()
+
             messages.info(request, 'Tu usuario fue registrado satisfactoriamente!')
         else:
             messages.info(request, 'Tu usuario no puso ser registrado!')
@@ -55,6 +61,7 @@ def register(request):
     }
 
     return render(request, 'UserFami/login.html', contexto)
+
 
 
 

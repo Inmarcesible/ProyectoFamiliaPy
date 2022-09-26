@@ -8,7 +8,7 @@
             <div class="flex-grow-1">
                 <h5>Las Personas ingresadas son: </h5>
                 {% for per in personas %}
-                    <p>Nombre: {{per.nombre}} / Rut: {{per.rutpersona}} / Genero: {{per.genero}}
+                    <p>Nombre: {{per.nombre}}, Rut: {{per.rutpersona}}, Genero: {{per.genero}}, Fecha Nacimiento: {{per.fecnacimiento}}
                         <a href="{% url 'AppFamiPersonaEditar' per.rutpersona %}">Editar</a>
                         <a href="{% url 'AppFamiPersonaEliminar' per.rutpersona %}">Eliminar</a>
                     </p>

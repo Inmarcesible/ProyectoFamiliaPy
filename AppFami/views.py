@@ -43,6 +43,7 @@ def personas(request):
     return render(request, 'AppFami/personas.html', personas_dto)
 """
 
+@login_required
 def persona_leer(request):
     personas = Persona.objects.all()
     contexto = {
@@ -116,22 +117,44 @@ def personas(request):
 
     return render(request, 'AppFami/personas.html', contexto)
 
+@login_required
 def buscar_persona(request):
 
     persona_buscar = []
+    padres_buscar = []
+    padres_buscar2 = []
+    hijos_buscar = []
+
     if request.method == 'POST':
         rut = request.POST.get('rutpersona')
         persona_buscar = Persona.objects.filter(rutpersona__icontains=rut)
+        padres_buscar = Padre.objects.filter(rutperosna__icontains=rut)
+        padres_buscar2 = Hijo.objects.filter(ruthijo__icontains=rut)
+        hijos_buscar = Hijo.objects.filter(rutperosna__icontains=rut)
+
         #persona_buscar = Persona.objects.filter(rutpersona__icontains=rut).first() #Trae la primera persona que encuentre
     else:
         redirect('AppFamiPersonas')
 
     contexto = {
         'my_form': BuscaPersona(),
-        'personab': persona_buscar
+        'personab': persona_buscar,
+        'padresb': padres_buscar,
+        'padresb2': padres_buscar2,
+        'hijosb': hijos_buscar
     }
     return render(request, 'AppFami/persona/buscar_perrsona.html', contexto)
 
+
+def persona_detalle(request, rutpersona):
+    personag = Persona.objects.get(rutpersona=rutpersona)
+
+    contexto = {
+        'personad': personag
+    }
+    return render(request, 'AppFami/persona/buscar_perrsona.html', contexto)
+
+@login_required
 def hijos(request):
     if request.method == 'POST':
         my_form = HijoForm(request.POST)
@@ -148,13 +171,14 @@ def hijos(request):
     }
     return render(request, 'AppFami/hijos.html', contexto)
 
+@login_required
 def padres(request):
     if request.method == 'POST':
         my_form = PadreForm(request.POST)
 
         if my_form.is_valid():
             data = my_form.cleaned_data
-            padre_date = Padre(rutperosna=data.get('rutperosna'),rutpadre=data.get('rutpadre'))
+            padre_date = Padre(rutperosna=data.get('rutperosna'), rutpadre=data.get('rutpadre'))
             padre_date.save()
 
     padres = Padre.objects.all()
@@ -166,4 +190,6 @@ def padres(request):
 
     #return redirect('AppFamiInicio')
     #return render(request, 'AppFami/padres.html')
+
+
 
