@@ -30,7 +30,7 @@
                 {% if padresb %}
                     <p>La persona tiene los siguientes rut asociados como sus padres:</p>
                     {% for per in padresb %}
-                        <p>Rut padre: {{per.rutpadre}}</p>
+                        <p>Rut padre: {{per.rutpadre}}</p> <!--<a href="{-% url 'AppFamiBuscarPersona2' per.rutpadre %-}">Ver</a>-->
                     {% endfor %}
                 {% elif padresb2 %}
                     <p>La persona tiene los siguientes rut asociados como sus padres:</p>

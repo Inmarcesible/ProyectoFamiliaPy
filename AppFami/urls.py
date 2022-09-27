@@ -12,7 +12,9 @@ urlpatterns = [
     path('persona/crear', persona_crear, name='AppFamiPersonaCrear'),
     path('persona/eliminar/<int:rutpersona>', persona_eliminar, name='AppFamiPersonaEliminar'),
     path('persona/editar/<int:rutpersona>', persona_editar, name='AppFamiPersonaEditar'),
+    path('buscar/<int:rutpersona>',buscar_persona2, name = 'AppFamiBuscarPersona2'),
 ]
+
 
 
 

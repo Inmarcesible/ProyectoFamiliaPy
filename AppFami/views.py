@@ -145,6 +145,36 @@ def buscar_persona(request):
     }
     return render(request, 'AppFami/persona/buscar_perrsona.html', contexto)
 
+@login_required
+def buscar_persona2(request, rutpersona):
+
+    persona_buscar = []
+    padres_buscar = []
+    padres_buscar2 = []
+    hijos_buscar = []
+
+    if request.method == 'POST':
+        #rut = request.POST.get('rutpersona')
+        persona_buscar = Persona.objects.filter(rutpersona__icontains=rutpersona)
+        padres_buscar = Padre.objects.filter(rutperosna__icontains=rutpersona)
+        padres_buscar2 = Hijo.objects.filter(ruthijo__icontains=rutpersona)
+        hijos_buscar = Hijo.objects.filter(rutperosna__icontains=rutpersona)
+
+        #persona_buscar = Persona.objects.filter(rutpersona__icontains=rut).first() #Trae la primera persona que encuentre
+    else:
+        redirect('AppFamiPersonas')
+
+    persona_form = BuscaPersona(initial={'rutpersona': rutpersona})
+
+    contexto = {
+        'my_form': persona_form,
+        'personab': persona_buscar,
+        'padresb': padres_buscar,
+        'padresb2': padres_buscar2,
+        'hijosb': hijos_buscar
+    }
+    return render(request, 'AppFami/persona/buscar_perrsona.html', contexto)
+
 
 def persona_detalle(request, rutpersona):
     personag = Persona.objects.get(rutpersona=rutpersona)
